@@ -24,7 +24,7 @@ Files:
 
 Open it on your iPhone and add it to your home screen
 -------------------------------------------------------------------------
-  1. Open the URL https://github.com/Jake29046-png/Strava-Tax-Fixer in Safari on your iPhone (must be Safari -
+  1. Open the URL https://jake29046-png.github.io/Strava-Tax-Fixer/ in Safari on your iPhone (must be Safari -
      "Add to Home Screen" only works from Safari, not Chrome/other
      browsers on iOS).
   2. Tap the Share button (square with an arrow, bottom of the screen).
