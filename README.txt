@@ -22,34 +22,9 @@ Files:
   app_icon.png    - used as the browser tab icon and the home-screen icon
 
 
-STEP 1 - Put these files somewhere they can be reached over the internet
+Open it on your iPhone and add it to your home screen
 -------------------------------------------------------------------------
-Pyodide requires the page to be served over http(s):// - opening
-index.html directly from your file system (a file:// URL) will not work,
-browsers block the necessary requests for security reasons.
-
-The easiest free option is GitHub Pages:
-
-  1. Create a free GitHub account if you don't have one (github.com).
-  2. Create a new repository (e.g. "strava-tax-fixer"). Public is fine and
-     free; the files aren't sensitive, they're just the app itself.
-  3. Upload all 6 files in this folder to that repository (drag-and-drop
-     works fine on github.com's web interface - use "Add file" ->
-     "Upload files").
-  4. In the repository's Settings tab -> Pages (left sidebar), under
-     "Build and deployment", set Source to "Deploy from a branch",
-     Branch to "main" (or "master"), folder "/ (root)", then Save.
-  5. GitHub will give you a URL like:
-       https://yourusername.github.io/strava-tax-fixer/
-     It can take a minute or two to go live the first time.
-
-Alternative: Cloudflare Pages (pages.cloudflare.com) works the same way
-and is also free, if you'd rather not use GitHub.
-
-
-STEP 2 - Open it on your iPhone and add it to your home screen
--------------------------------------------------------------------------
-  1. Open the URL from Step 1 in Safari on your iPhone (must be Safari -
+  1. Open the URL in Safari on your iPhone (must be Safari -
      "Add to Home Screen" only works from Safari, not Chrome/other
      browsers on iOS).
   2. Tap the Share button (square with an arrow, bottom of the screen).
