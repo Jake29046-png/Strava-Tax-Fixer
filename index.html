@@ -27,6 +27,8 @@
     font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
   .wrap { max-width: 640px; margin: 0 auto; padding: 18px 16px 60px; }
   h1 { font-size: 22px; font-weight: 700; margin: 4px 0 16px; }
   .muted { color: var(--muted); }
@@ -112,6 +114,9 @@
   <div id="dropzone">
     <div id="dropzoneText">Drag &amp; drop a .FIT, .TCX, or .GPX file here<br>or tap to browse</div>
     <div class="sub" id="dropzoneSub">Runs entirely on your device - nothing uploaded anywhere</div>
+  </div>
+  <div style="text-align:center; margin-top:8px;">
+    <a href="how-to-export.html" style="font-size:12.5px;">Don't have the file yet? How to export from Strava/Garmin →</a>
   </div>
   <input type="file" id="fileInput" accept=".fit,.tcx,.gpx">
 

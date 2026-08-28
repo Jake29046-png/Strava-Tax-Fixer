@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>How to export your activity file — Strava Tax Fixer</title>
+<link rel="icon" href="app_icon.png">
+<link rel="apple-touch-icon" href="app_icon.png">
+<style>
+  :root {
+    --bg: #21211F;
+    --card: #29292A;
+    --accent: #F74F00;
+    --accent-text: #FEFBFF;
+    --muted: #A8A8A3;
+    --border: #3A3A38;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; background: var(--bg); color: #ECECE9;
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 18px 16px 60px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back-link { font-size: 13px; display: inline-block; margin-bottom: 14px; }
+  h1 { font-size: 22px; font-weight: 700; margin: 4px 0 6px; }
+  .intro { font-size: 14px; color: var(--muted); line-height: 1.5; margin-bottom: 20px; }
+
+  .platform-card { background: var(--card); border-radius: 18px; padding: 18px; margin-bottom: 18px; }
+  .platform-title { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 10px; }
+  .dot.strava { background: #F74F00; }
+  .dot.garmin { background: #4F7CFB; }
+  .platform-sub { font-size: 12.5px; color: var(--muted); margin-bottom: 14px; }
+
+  .badge-row { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+  .badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 10px; background: rgba(247,79,0,.15); color: var(--accent); }
+
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+  .steps li {
+    counter-increment: step; position: relative; padding-left: 34px; margin-bottom: 14px;
+    font-size: 13.5px; line-height: 1.5;
+  }
+  .steps li:last-child { margin-bottom: 0; }
+  .steps li::before {
+    content: counter(step); position: absolute; left: 0; top: -1px;
+    width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: var(--accent-text);
+    font-size: 11.5px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+  }
+  .steps b { color: #fff; }
+  code {
+    background: #1c1c1a; border: 1px solid var(--border); border-radius: 5px;
+    padding: 1px 6px; font-size: 12px; font-family: "SF Mono", Consolas, monospace;
+  }
+
+  hr.sep { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+  .note { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .note b { color: #ddd; }
+
+  .bulk-card { background: var(--card); border-radius: 16px; padding: 16px; margin-top: 4px; }
+  .bulk-card h3 { font-size: 14px; margin: 0 0 8px; }
+  .bulk-card p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0 0 6px; }
+
+  .format-table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 12.5px; }
+  .format-table th, .format-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  .format-table th { color: var(--muted); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: .03em; }
+  .format-table td.yes { color: #7ED08A; }
+  .format-table td.no { color: #A8A8A3; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="index.html">← Back to Strava Tax Fixer</a>
+  <h1>Getting your activity file</h1>
+  <p class="intro">
+    To edit an activity, you first need the actual .FIT, .TCX, or .GPX file off of
+    Strava or Garmin Connect. Here's exactly where to find it. All of this happens
+    on their website (strava.com / connect.garmin.com) — the mobile apps don't
+    offer file export.
+  </p>
+
+  <div class="platform-card">
+    <div class="platform-title"><span class="dot strava"></span>Strava</div>
+    <div class="platform-sub">From the activity page, on strava.com (desktop site, not the app)</div>
+    <div class="badge-row">
+      <span class="badge">GPX</span><span class="badge">TCX</span><span class="badge">Original (often FIT)</span>
+    </div>
+    <ol class="steps">
+      <li>Log in at <b>strava.com</b> and open the activity you want.</li>
+      <li>On the activity page, find the <b>"···" (more) menu</b> — it's on the left side, below the activity title.</li>
+      <li>For a GPX file, click <b>"Export GPX"</b>. It downloads immediately.</li>
+      <li>For the richest data (heart rate, cadence, power), you want either <b>"Export Original"</b> from that same menu — this gives you the raw file your device recorded, usually .FIT — or a TCX file: Strava doesn't put TCX in the menu, but you can get one by adding <code>/export_tcx</code> to the end of the activity's URL and hitting enter (e.g. <code>strava.com/activities/12345678/export_tcx</code>).</li>
+    </ol>
+    <hr class="sep">
+    <p class="note"><b>Which to pick:</b> "Export Original" is almost always the best choice if it's there — it's the exact file your watch/device produced, before Strava touched it. GPX is the safest fallback (works for any GPS activity) but strips out estimated power. TCX sits in between — has heart rate, cadence, and power, just not everything a native FIT file has.</p>
+  </div>
+
+  <div class="platform-card">
+    <div class="platform-title"><span class="dot garmin"></span>Garmin Connect</div>
+    <div class="platform-sub">From the activity page, on connect.garmin.com</div>
+    <div class="badge-row">
+      <span class="badge">FIT</span><span class="badge">GPX</span><span class="badge">TCX</span>
+    </div>
+    <ol class="steps">
+      <li>Log in at <b>connect.garmin.com</b>, click <b>Activities</b> in the left menu, then open the activity you want.</li>
+      <li>On the activity page, find the <b>gear/settings icon</b> in the upper-right corner.</li>
+      <li>Click it to open a dropdown with four options: <b>Export Original</b> (the raw .FIT file — every data point your watch recorded), <b>Export to TCX</b>, <b>Export to GPX</b>, and Export to Google Earth (KML — not usable here).</li>
+      <li>Pick the one you want and it downloads straight away.</li>
+    </ol>
+    <hr class="sep">
+    <p class="note"><b>Which to pick:</b> <b>Export Original</b> (.FIT) is the best choice on Garmin — it's the native format and has everything: power, cadence, heart rate, GPS, and more. Only use TCX or GPX if you specifically need those formats for something else.</p>
+  </div>
+
+  <table class="format-table">
+    <tr><th>Field</th><th>.FIT</th><th>.TCX</th><th>.GPX</th></tr>
+    <tr><td>Distance / GPS route</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+    <tr><td>Elevation</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+    <tr><td>Heart rate</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓ (if device supports it)</td></tr>
+    <tr><td>Cadence</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓ (if device supports it)</td></tr>
+    <tr><td>Power</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">rarely</td></tr>
+    <tr><td>Calories</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td></tr>
+  </table>
+
+  <div class="bulk-card">
+    <h3>Downloading everything at once</h3>
+    <p><b>Strava:</b> Account settings → "Download or Delete Your Account" → "Request Your Archive". Strava emails you a link to a ZIP of every activity's original file.</p>
+    <p><b>Garmin Connect:</b> click your username (top right) → "Account Settings" → "Export Your Data". Garmin prepares a full export, typically ready within 24–48 hours.</p>
+  </div>
+
+  <p class="note" style="margin-top:22px;">
+    Once you've got the file downloaded (it'll be in your phone's Files app, or your
+    computer's Downloads folder), head back to <a href="index.html">Strava Tax Fixer</a>
+    and drop it in.
+  </p>
+</div>
+</body>
+</html>
