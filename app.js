@@ -18,6 +18,13 @@ function log(msg) {
   el.scrollTop = el.scrollHeight;
 }
 
+window.addEventListener('error', (e) => {
+  log('JS ERROR: ' + e.message + ' (' + e.filename + ':' + e.lineno + ')');
+});
+window.addEventListener('unhandledrejection', (e) => {
+  log('PROMISE REJECTION: ' + (e.reason && e.reason.message ? e.reason.message : e.reason));
+});
+
 function setLoading(text) {
   $('loadingOverlay').style.display = 'flex';
   $('loadingText').textContent = text;
@@ -72,6 +79,12 @@ function base64ToBytes(b64) {
 }
 
 async function handleFile(file) {
+  log('handleFile() started for ' + file.name);
+  if (!webBridge) {
+    log('ERROR: webBridge not ready yet (Pyodide still loading?)');
+    alert('Still starting up - please wait a few seconds and try again.');
+    return;
+  }
   const name = file.name;
   const ext = name.toLowerCase().slice(name.lastIndexOf('.'));
   if (!['.fit', '.tcx', '.gpx'].includes(ext)) {
@@ -155,9 +168,16 @@ function applyEdits() {
 
 // ---------------------------------------------------------------- actions
 
-$('dropzone').addEventListener('click', () => $('fileInput').click());
+$('dropzone').addEventListener('click', () => {
+  log('dropzone tapped, opening picker…');
+  $('fileInput').click();
+});
 $('fileInput').addEventListener('change', (e) => {
-  if (e.target.files.length) handleFile(e.target.files[0]);
+  log('picker closed, files selected: ' + e.target.files.length);
+  if (e.target.files.length) {
+    log('selected file: ' + e.target.files[0].name + ' (' + e.target.files[0].size + ' bytes)');
+    handleFile(e.target.files[0]);
+  }
 });
 ['dragover', 'dragenter'].forEach(evt =>
   $('dropzone').addEventListener(evt, (e) => { e.preventDefault(); $('dropzone').classList.add('dragover'); })
